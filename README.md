@@ -7,10 +7,15 @@ This is a Flask-based web application for managing student records with CRUD ope
 git clone https://github.com/Yogesh2580123/teacher-portal-students.git
 cd teacher-portal-students
 
+
+<!-- if not install virtualenv  -->
+pip install virtualenv
 virtualenv venv
 venv\scripts\activate
 
-
+<!-- if install virtualenv  -->
+virtualenv venv
+venv\scripts\activate
 
 pip install -r requirements.txt
 
