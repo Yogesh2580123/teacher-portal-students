@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Teacher Portal - Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+
+</head>
+<body>
+    
+    {% include 'navbar.html' %}
+    <div class="search-container">
+       <input type="text" id="searchInput" placeholder="Search name, subject, or marks..." />
+       <button id="searchBtn">Search</button>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="overlay" onclick="closeModal()"></div>
+    <!-- Student Modal -->
+    <div id="studentModal">
+        <h3>Add Student</h3>
+        <form onsubmit="submitStudent(event)">
+            <label>Name:</label><br/>
+            <input type="text" id="name" required><br/><br/>
+            <label>Subject:</label><br/>
+            <input type="text" id="subject" required><br/><br/>
+            <label>Marks:</label><br/>
+            <input type="number" id="marks" required><br/><br/>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+            <div id="message" style="margin-top:10px;"></div>
+        </form>
+    </div>
+    
+    <div class="table-container">
+          <table id="studentsTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Subject</th>
+                <th>Marks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr data-id="{{ student[0] }}">
+                <td class="name">{{ student[1] }}</td>
+                <td class="subject">{{ student[2] }}</td>
+                <td class="marks">{{ student[3] }}</td>
+                <td>
+                    <button class="editBtn">Edit</button>
+                    <button class="deleteBtn">Delete</button>
+                    <button class="saveBtn" style="display:none;">Save</button>
+                    <button class="cancelBtn" style="display:none;">Cancel</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+        <!-- Add Student Button -->
+    <div style="text-align:left;">
+        <button onclick="openModal()">➕ Add New Student</button>
+    </div>
+    <script src="{{ url_for('static', filename='javascript/main.js') }}"></script>
+</body>
+</html>

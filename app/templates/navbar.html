@@ -1,0 +1,45 @@
+<!-- navbar.html -->
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="/main_home" class="nav-link">🏠 Home</a>
+    </div>
+    <div class="nav-right">
+        <form method="POST" action="/logout" style="margin: 0;">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<style>
+.navbar {
+    background-color: #004080;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+}
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.nav-link:hover {
+    text-decoration: underline;
+}
+.logout-btn {
+    background-color: #e60000;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.logout-btn:hover {
+    background-color: #cc0000;
+}
+</style>
