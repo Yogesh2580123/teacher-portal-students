@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from app.db import get_user, get_all_students, update_student, delete_student, update_password, add_or_update_student, search_students_single
+from app.db import get_user, get_all_students, update_student, delete_student, update_password, add_or_update_student_record, search_students_single
 from flask import jsonify
 from flask import request
 import bcrypt
@@ -87,7 +87,7 @@ def add_student():
         return jsonify({"error": "Invalid input"}), 400
 
     try:
-        add_or_update_student(name, subject, marks)  # ✅ this is your sqlite3 function
+        add_or_update_student_record(name, subject, marks)  # ✅ this is your sqlite3 function
         return jsonify({"message": "Student added or updated"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500

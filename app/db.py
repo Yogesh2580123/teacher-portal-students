@@ -90,14 +90,16 @@ def find_student_by_name_subject(name, subject):
     conn.close()
     return result
 
-def add_or_update_student(name, subject, marks):
+#add the marks
+def add_or_update_student_record(name, subject, marks):
     student = find_student_by_name_subject(name, subject)
     conn = get_db_connection()
     c = conn.cursor()
 
     if student:
-        student_id, _ = student
-        c.execute("UPDATE students SET marks = ? WHERE id = ?", (marks, student_id))  # 🔁 Replace marks
+        student_id, existing_marks = student
+        new_marks = existing_marks + marks  # add instead of replace
+        c.execute("UPDATE students SET marks = ? WHERE id = ?", (new_marks, student_id))  # 🔁 Replace marks
     else:
         c.execute("INSERT INTO students (name, subject, marks) VALUES (?, ?, ?)", (name, subject, marks))
 
@@ -127,16 +129,19 @@ def search_students_single(search_term=None):
     results = c.fetchall()
     conn.close()
     return [dict(row) for row in results]
-# def add_or_update_student_record(name, subject, marks):
-#     student = Student.query.filter_by(name=name, subject=subject).first()
-#     if student:
-#         student.marks = marks  # ✅ REPLACE, not add
-#     else:
-#         student = Student(name=name, subject=subject, marks=marks)
-#         db.session.add(student)
 
-#     try:
-#         db.session.commit()
-#     except Exception as e:
-#         db.session.rollback()
-#         raise e
+
+# replace the marks
+# def add_or_update_student_record(name, subject, marks):
+#     student = find_student_by_name_subject(name, subject)
+#     conn = get_db_connection()
+#     c = conn.cursor()
+
+#     if student:
+#         student_id, _ = student
+#         c.execute("UPDATE students SET marks = ? WHERE id = ?", (marks, student_id))  # 🔁 Replace marks
+#     else:
+#         c.execute("INSERT INTO students (name, subject, marks) VALUES (?, ?, ?)", (name, subject, marks))
+
+#     conn.commit()
+#     conn.close()
