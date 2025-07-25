@@ -126,3 +126,37 @@ def students_search():
 
 
 
+# @main.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form.get('username')
+#         password = request.form.get('password')
+
+#         if not username:
+#             return render_template('login.html', error="Please enter your username.")
+
+#         user = get_user(username)
+
+#         if user:
+#             stored_hash = user[2]  # hashed password from DB
+
+#             if isinstance(stored_hash, str):
+#                 stored_hash = stored_hash.strip().encode('utf-8')
+
+#             try:
+#                 if bcrypt.checkpw(password.encode('utf-8'), stored_hash):
+#                     session['user_id'] = user[0]
+#                     session['username'] = user[1]
+#                     return redirect(url_for('main.main_home'))
+#                 else:
+#                     error = "Invalid username or password."
+#             except ValueError as e:
+#                 print("bcrypt error:", e)
+#                 error = "Password hash is invalid. Please reset your password."
+#         else:
+#             error = "Invalid username or password."
+
+#         return render_template('login.html', error=error)
+
+#     # GET request - show login form
+#     return render_template('login.html')
